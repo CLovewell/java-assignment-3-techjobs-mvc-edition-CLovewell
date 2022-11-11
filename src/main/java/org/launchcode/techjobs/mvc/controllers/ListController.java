@@ -3,6 +3,11 @@ package org.launchcode.techjobs.mvc.controllers;
 
 import org.launchcode.techjobs.mvc.models.Job;
 import org.launchcode.techjobs.mvc.models.JobData;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.ParseException;
+import org.springframework.expression.ParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +26,8 @@ public class ListController {
 
     static HashMap<String, String> columnChoices = new HashMap<>();
     static HashMap<String, Object> tableChoices = new HashMap<>();
+    static HashMap<Expression, String> jobFields = new HashMap<>();
+    static ExpressionParser parser = new SpelExpressionParser();
 
     public ListController () {
         columnChoices.put("all", "All");
@@ -32,7 +39,14 @@ public class ListController {
         tableChoices.put("employer", JobData.getAllEmployers());
         tableChoices.put("location", JobData.getAllLocations());
         tableChoices.put("positionType", JobData.getAllPositionTypes());
-        tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
+        tableChoices.put("coreCompetency", JobData.getAllCoreCompetencies());
+
+        jobFields.put(parser.parseExpression("id"), "ID");
+        jobFields.put(parser.parseExpression("name"), "Name");
+        jobFields.put(parser.parseExpression("employer"), "Employer");
+        jobFields.put(parser.parseExpression("location"), "Location");
+        jobFields.put(parser.parseExpression("positionType"), "Position Type");
+        jobFields.put(parser.parseExpression("coreCompetency"), "Skill");
     }
 
     @GetMapping(value = "")
@@ -42,7 +56,7 @@ public class ListController {
         model.addAttribute("employers", JobData.getAllEmployers());
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
-        model.addAttribute("skills", JobData.getAllCoreCompetency());
+        model.addAttribute("skills", JobData.getAllCoreCompetencies());
 
         return "list";
     }
@@ -59,6 +73,7 @@ public class ListController {
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
+        model.addAttribute("fields", jobFields);
 
         return "list-jobs";
     }

@@ -224,7 +224,7 @@ public class JobData {
         return allPositionTypes;
     }
 
-    public static ArrayList<CoreCompetency> getAllCoreCompetency() {
+    public static ArrayList<CoreCompetency> getAllCoreCompetencies() {
         loadData();
         allCoreCompetency.sort(new NameSorter());
         return allCoreCompetency;

@@ -11,30 +11,12 @@
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
     <table th:fragment="job-list" th:each="job : ${jobs}" class="job-listing">
-        <tr>
-            <td>ID</td>
-            <td><i th:text="${job.id}"></i></td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td><i th:text="${job.name}"></i></td>
-        </tr>
-        <tr>
-            <td>Employer</td>
-            <td><i th:text="${job.employer}"></i></td>
-        </tr>
-        <tr>
-            <td>Location</td>
-            <td><i th:text="${job.location}"></i></td>
-        </tr>
-        <tr>
-            <td>Position Type</td>
-            <td><i th:text="${job.positionType}"></i></td>
-        </tr>
-        <tr>
-            <td>Skill</td>
-            <td><i th:text="${job.coreCompetency}"></i></td>
-        </tr>
+        <th:block th:each="field : ${fields}">
+            <tr>
+                <td th:text="${field.value}"></td>
+                <td th:text="${field.key.getValue(job)}"></td>
+            </tr>
+        </th:block>
     </table>
 
 </div>
