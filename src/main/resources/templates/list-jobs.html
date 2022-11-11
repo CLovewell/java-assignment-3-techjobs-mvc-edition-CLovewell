@@ -15,7 +15,17 @@
             <tr>
                 <th:block th:each="pair : ${map}">
                     <td th:text="${pair.value}"></td>
-                    <td><i th:text="${pair.key.getValue(job)}"></i></td>
+
+                    <td th:if="${pair.key.equals('name') or pair.key.equals('id')}">
+                        <i th:text="${parser.parseExpression(pair.key).getValue(job)}"></i>
+                    </td>
+
+                    <td th:unless="${pair.key.equals('name') or pair.key.equals('id')}">
+                        <a th:href="@{/list/jobs(column=${pair.key},
+                        value=${parser.parseExpression(pair.key).getValue(job)})}">
+                        <i th:text="${parser.parseExpression(pair.key).getValue(job)}"></i>
+                        </a>
+                    </td>
                 </th:block>
             </tr>
         </th:block>

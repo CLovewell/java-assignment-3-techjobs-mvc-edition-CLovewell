@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
-import static org.launchcode.techjobs.mvc.controllers.ListController.columnChoices;
-import static org.launchcode.techjobs.mvc.controllers.ListController.jobFields;
+import static org.launchcode.techjobs.mvc.controllers.ListController.*;
 
 
 /**
@@ -55,6 +54,7 @@ public class SearchController {
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchTerm", searchTerm);
         model.addAttribute("fields", jobFields);
+        model.addAttribute("parser", parser);
         return "search";
     }
 
