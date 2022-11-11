@@ -13,27 +13,27 @@
     <table th:fragment="job-list" th:each="job : ${jobs}" class="job-listing">
         <tr>
             <td>ID</td>
-            <td th:text="${job.id}"></td>
+            <td><i th:text="${job.id}"></i></td>
         </tr>
         <tr>
             <td>Name</td>
-            <td th:text="${job.name}"></td>
+            <td><i th:text="${job.name}"></i></td>
         </tr>
         <tr>
             <td>Employer</td>
-            <td th:text="${job.employer}"></td>
+            <td><i th:text="${job.employer}"></i></td>
         </tr>
         <tr>
             <td>Location</td>
-            <td th:text="${job.location}"></td>
+            <td><i th:text="${job.location}"></i></td>
         </tr>
         <tr>
             <td>Position Type</td>
-            <td th:text="${job.positionType}"></td>
+            <td><i th:text="${job.positionType}"></i></td>
         </tr>
         <tr>
             <td>Skill</td>
-            <td th:text="${job.coreCompetency}"></td>
+            <td><i th:text="${job.coreCompetency}"></i></td>
         </tr>
     </table>
 
