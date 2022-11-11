@@ -26,7 +26,7 @@ public class ListController {
 
     static HashMap<String, String> columnChoices = new HashMap<>();
     static HashMap<String, Object> tableChoices = new HashMap<>();
-    static HashMap<Expression, String> jobFields = new HashMap<>();
+    static ArrayList<HashMap<Expression, String>> jobFields = new ArrayList<>();
     static ExpressionParser parser = new SpelExpressionParser();
 
     public ListController () {
@@ -41,12 +41,24 @@ public class ListController {
         tableChoices.put("positionType", JobData.getAllPositionTypes());
         tableChoices.put("coreCompetency", JobData.getAllCoreCompetencies());
 
-        jobFields.put(parser.parseExpression("id"), "ID");
-        jobFields.put(parser.parseExpression("name"), "Name");
-        jobFields.put(parser.parseExpression("employer"), "Employer");
-        jobFields.put(parser.parseExpression("location"), "Location");
-        jobFields.put(parser.parseExpression("positionType"), "Position Type");
-        jobFields.put(parser.parseExpression("coreCompetency"), "Skill");
+        HashMap<Expression, String> idField = new HashMap<>();
+        idField.put(parser.parseExpression("id"), "ID");
+        HashMap<Expression, String> nameField = new HashMap<>();
+        nameField.put(parser.parseExpression("name"), "Name");
+        HashMap<Expression, String> employerField = new HashMap<>();
+        employerField.put(parser.parseExpression("employer"), "Employer");
+        HashMap<Expression, String> locationField = new HashMap<>();
+        locationField.put(parser.parseExpression("location"), "Location");
+        HashMap<Expression, String> positionTypeField = new HashMap<>();
+        positionTypeField.put(parser.parseExpression("positionType"), "Position Type");
+        HashMap<Expression, String> coreCompetencyField = new HashMap<>();
+        coreCompetencyField.put(parser.parseExpression("coreCompetency"), "Skill");
+        jobFields.add(idField);
+        jobFields.add(nameField);
+        jobFields.add(employerField);
+        jobFields.add(locationField);
+        jobFields.add(positionTypeField);
+        jobFields.add(coreCompetencyField);
     }
 
     @GetMapping(value = "")

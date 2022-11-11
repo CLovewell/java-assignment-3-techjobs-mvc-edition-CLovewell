@@ -11,10 +11,12 @@
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
     <table th:fragment="job-list" th:each="job : ${jobs}" class="job-listing">
-        <th:block th:each="field : ${fields}">
+        <th:block th:each="map : ${fields}">
             <tr>
-                <td th:text="${field.value}"></td>
-                <td th:text="${field.key.getValue(job)}"></td>
+                <th:block th:each="pair : ${map}">
+                    <td th:text="${pair.value}"></td>
+                    <td><i th:text="${pair.key.getValue(job)}"></i></td>
+                </th:block>
             </tr>
         </th:block>
     </table>
